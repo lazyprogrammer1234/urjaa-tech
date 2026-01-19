@@ -10,28 +10,34 @@ const config: Config = {
     extend: {
       colors: {
         urjaa: {
-          700: "#334155",
-          800: "#1E293B",
-          900: "#0F172A",
-        }
+          navy: {
+            DEFAULT: '#0f172a', // Slate 900
+            light: '#334155',   // Slate 700
+            dark: '#020617',    // Slate 950
+          },
+          accent: {
+            DEFAULT: '#15803d', // Green 700
+            light: '#16a34a',
+            dark: '#14532d',
+          },
+          primary: { // Map primary to Navy for compatibility
+            DEFAULT: '#0f172a',
+            light: '#1e293b',
+            dark: '#020617',
+          },
+          // Add Slate scale explicitly if needed, or rely on Tailwind default
+        },
       },
-      border: "hsl(var(--border))",
-      input: "hsl(var(--input))",
-      ring: "hsl(var(--ring))",
-      background: "hsl(var(--background))",
-      foreground: "hsl(var(--foreground))",
-    },
-    fontFamily: {
-      sans: ["var(--font-inter)", "sans-serif"],
-      display: ["var(--font-outfit)", "sans-serif"],
-    },
-    backgroundImage: {
-      "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-      "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      "industrial-gradient": "linear-gradient(to right bottom, #0B1121, #1a243e)",
+      fontFamily: {
+        sans: ["var(--font-inter)", "sans-serif"],
+        display: ["var(--font-inter)", "sans-serif"], // Changed to Inter for professional look
+      },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
     },
   },
-},
   plugins: [],
 };
 export default config;
