@@ -1,26 +1,66 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Corporate Power Palette - Blue & Green */
+  --color-urjaa-navy: #0f172a;
+  /* Slate 900 */
+  --color-urjaa-navy-light: #1e293b;
+  /* Slate 800 */
+  --color-urjaa-navy-dark: #020617;
+  /* Slate 950 */
+
+  --color-urjaa-primary: #15803d;
+  /* Green 700 - Eco Power */
+  --color-urjaa-primary-hover: #166534;
+  /* Green 800 */
+  --color-urjaa-primary-light: #22c55e;
+  /* Green 500 */
+
+  --color-urjaa-accent: #0284c7;
+  /* Sky 600 - Reliable Blue */
+
+  /* Retain compat aliases */
+  --color-urjaa-orange: var(--color-urjaa-primary);
+  --color-urjaa-orange-hover: var(--color-urjaa-primary-hover);
+  --color-urjaa-orange-light: var(--color-urjaa-primary-light);
+
+  --font-display: var(--font-outfit), sans-serif;
+  --font-sans: var(--font-inter), sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --primary: 142.1 76.2% 36.3%;
+    /* Green 700 */
+    --primary-foreground: 355.7 100% 97.3%;
+    --radius: 0.5rem;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    border-color: #e2e8f0;
+  }
+
+  body {
+    background-color: #ffffff;
+    color: #0f172a;
+    font-family: var(--font-inter), sans-serif;
+  }
+}
+
+/* Glass Styles */
+.glass-panel {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.glass-dark {
+  background-color: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }

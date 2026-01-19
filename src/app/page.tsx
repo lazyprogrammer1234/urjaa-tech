@@ -1,65 +1,222 @@
+import { Button } from "@/components/ui/button";
+import { FindGeneratorButton } from "@/components/home/FindGeneratorButton";
+import { ContactSalesButton } from "@/components/home/ContactSalesButton";
+import { ArrowRight, CheckCircle2, Factory, ShieldCheck, Clock } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="flex flex-col">
+      {/* Intro Logo Section */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-white">
+        <div className="absolute inset-0 bg-white"></div>
+
+        <div className="relative z-10 w-full h-full flex items-center justify-center">
+          <video
+            src="/logo-intro.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover md:object-contain max-w-[100vw] max-h-[100vh]"
+          />
+        </div>
+
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 text-urjaa-navy/30 animate-bounce z-20">
+          <ArrowRight className="h-8 w-8 rotate-90" />
+        </div>
+      </section>
+
+      {/* Hero Section */}
+      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-urjaa-navy-dark text-white pt-20">
+        {/* Background Logo Watermark */}
+        <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none opacity-25">
+          <img src="/logo.jpg" alt="" className="w-full h-full object-cover opacity-60 mix-blend-plus-lighter" />
+        </div>
+
+        {/* Abstract Overlay */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-b from-urjaa-navy-dark/80 via-urjaa-navy-dark/60 to-urjaa-navy-dark/90"></div>
+          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+        </div>
+
+        <div className="container relative z-10 px-4 sm:px-8 text-center pt-12">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-urjaa-primary/10 backdrop-blur border border-urjaa-primary/20 text-sm font-medium text-urjaa-primary-light mb-8">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-urjaa-primary opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-urjaa-primary"></span>
+            </span>
+            Authorized Generator Dealership
+          </div>
+
+          <h1 className="text-6xl md:text-8xl font-display font-bold leading-tight tracking-tight mb-8 drop-shadow-2xl">
+            Powering tomorrow, <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-urjaa-primary-light to-urjaa-accent">
+              Responsibly
+            </span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+
+          <p className="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto leading-relaxed mb-12 font-light">
+            We deliver robust, industrial-grade power solutions. Specialized in Kubota and high-efficiency generators for your business continuity.
           </p>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <FindGeneratorButton />
+            <ContactSalesButton size="lg" variant="outline" className="h-14 px-8 text-lg border-white/20 text-white hover:bg-white/10 hover:border-white">
+              Contact Sales
+            </ContactSalesButton>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* Brands Section */}
+      <section id="products" className="py-24 bg-slate-50">
+        <div className="container px-4 sm:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-urjaa-navy-dark mb-4">Trusted Power Partners</h2>
+            <p className="text-slate-600">We offer certified generators from the world's most reliable manufacturers.</p>
+          </div>
+
+          <div className="max-w-5xl mx-auto">
+            {/* Kubota Card */}
+            <div className="group relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100">
+              <div className="absolute top-0 left-0 w-2 h-full bg-[#E54817] z-10"></div> {/* Kubota Orange */}
+
+              <div className="grid md:grid-cols-2">
+                <div className="p-8 md:p-12">
+                  <div className="mb-8 flex flex-col items-start gap-6">
+                    <div className="relative h-16 w-48 shrink-0">
+                      <img src="/kubota-logo.jpg" alt="Escorts Kubota Limited" className="h-full w-full object-contain object-left" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-slate-900">Kubota Gensets</h3>
+                      <p className="text-sm font-medium text-[#E54817]">Japanese Engineering Excellence</p>
+                    </div>
+                  </div>
+                  <p className="text-slate-600 mb-8 leading-relaxed">
+                    Compact, quiet, and fuel-efficient diesel generators perfect for commercial spaces and noise-sensitive areas. Known for legendary durability.
+                  </p>
+                  <ul className="space-y-3 mb-8">
+                    {["Low Noise Levels", "Compact Design", "High Fuel Economy", "CPCB IV+ Compliant"].map((item) => (
+                      <li key={item} className="flex items-center gap-2 text-slate-700 font-medium">
+                        <CheckCircle2 className="h-5 w-5 text-[#E54817]" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link href="https://enginebusiness.escortskubota.com/ekl-engines/gensets" target="_blank" rel="noopener noreferrer" className="w-full md:w-auto inline-block">
+                    <Button variant="outline" className="w-full border-slate-200 hover:border-[#E54817] hover:text-[#E54817]">
+                      View Kubota Models <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                </div>
+
+                {/* Poster Image */}
+                <div className="relative h-full min-h-[400px] bg-slate-100 md:rounded-r-2xl overflow-hidden">
+                  <img
+                    src="/kubota-final.jpg"
+                    alt="Kubota Generators"
+                    className="absolute inset-0 w-full h-full object-fill md:object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* Why Choose Us */}
+      <section id="about" className="py-24 bg-white relative overflow-hidden">
+        <div className="container px-4 sm:px-8">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-8">
+              <h2 className="text-3xl md:text-4xl font-bold text-urjaa-navy-dark leading-tight">
+                Why Industry Leaders <br />
+                Trust <span className="text-urjaa-orange">Urjaa Tech</span>
+              </h2>
+              <p className="text-slate-600 text-lg leading-relaxed">
+                We don't just sell generators; we provide guaranteed peace of mind. Our team of experts ensures you get the exact power solution your business needs, backed by stellar support.
+              </p>
+
+              <div className="space-y-6">
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 h-12 w-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
+                    <ShieldCheck className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900">Authorized Dealership</h4>
+                    <p className="text-slate-500 mt-1">Direct from manufacturer. 100% genuine parts and warranties.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 h-12 w-12 rounded-xl bg-orange-50 flex items-center justify-center text-urjaa-orange">
+                    <Factory className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900">Tailored Solutions</h4>
+                    <p className="text-slate-500 mt-1">Expert assessment of your load requirements to prevent overspending.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 h-12 w-12 rounded-xl bg-green-50 flex items-center justify-center text-green-600">
+                    <Clock className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900">Reliable Support</h4>
+                    <p className="text-slate-500 mt-1">Dedicated service team to keep your operations running 24/7.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Equipment Gallery */}
+            <div className="relative grid grid-cols-2 gap-4 mt-12 lg:mt-0">
+              <div className="aspect-[3/4] rounded-2xl bg-white overflow-hidden relative shadow-lg transform translate-y-8 border-4 border-white">
+                <Image
+                  src="/generator.png"
+                  alt="Industrial Generator Installation"
+                  fill
+                  className="object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="aspect-[3/4] rounded-2xl bg-white overflow-hidden relative shadow-lg transform -translate-y-8 border-4 border-white">
+                <Image
+                  src="/generator-2.jpg"
+                  alt="Soundproof Generator"
+                  fill
+                  className="object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-slate-100 max-w-[200px] text-center z-10 w-full">
+                <div className="flex flex-col items-center gap-1">
+                  <div className="flex -space-x-2 mb-1">
+                    {[1, 2, 3].map((i) => (
+                      <div key={i} className="h-6 w-6 rounded-full bg-slate-200 border-2 border-white"></div>
+                    ))}
+                  </div>
+                  <div>
+                    <span className="font-bold text-slate-900 block text-xl">500+</span>
+                    <p className="text-xs text-slate-500 font-medium">Projects Delivered</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-urjaa-navy text-white text-center">
+        <div className="container px-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Power Your Business?</h2>
+          <p className="text-blue-200 mb-8 max-w-xl mx-auto">Let our experts guide you to the perfect generator selection today.</p>
+          <Button size="lg" className="bg-white text-urjaa-navy-dark hover:bg-blue-50 font-bold px-8">
+            Get a Free Consultation
+          </Button>
+        </div>
+      </section>
     </div>
   );
 }
