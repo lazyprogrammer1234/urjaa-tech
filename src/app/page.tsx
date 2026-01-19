@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-slate-50 relative overflow-hidden font-sans">
+    <div className="min-h-screen bg-urjaa-navy-dark relative overflow-hidden font-sans">
       {/* Intro Logo Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden bg-white">
         <div className="absolute inset-0 bg-white"></div>
@@ -29,31 +29,41 @@ export default function Home() {
       </section>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+      <section id="home" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-urjaa-navy-dark text-white pt-20">
+        {/* Background Logo Watermark */}
+        <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none opacity-25">
+          <img src="/logo.jpg" alt="" className="w-full h-full object-cover opacity-60 mix-blend-plus-lighter" />
+        </div>
+
+        {/* Abstract Overlay */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-b from-urjaa-navy-dark/80 via-urjaa-navy-dark/60 to-urjaa-navy-dark/90"></div>
+          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+        </div>
 
         <div className="container relative z-10 px-4 sm:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             {/* Left Column: Text */}
             <div className="text-center lg:text-left pt-8">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-200/50 border border-slate-300 text-xs font-semibold text-slate-700 mb-8 mx-auto lg:mx-0 tracking-wide uppercase">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-urjaa-primary/10 backdrop-blur border border-urjaa-primary/20 text-xs font-semibold text-urjaa-orange-light mb-8 mx-auto lg:mx-0 tracking-wide uppercase">
                 <span className="relative flex h-2 w-2">
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-urjaa-accent"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-urjaa-orange opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-urjaa-orange"></span>
                 </span>
                 Authorized Industrial Dealer
               </div>
 
-              <h1 className="text-4xl md:text-6xl font-bold leading-tight tracking-tight mb-6 text-slate-900">
+              <h1 className="text-4xl md:text-6xl font-bold leading-tight tracking-tight mb-6 text-white drop-shadow-2xl">
                 Powering Industries, <br />
-                <span className="text-urjaa-accent">Reliably & Responsibly.</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-urjaa-orange-light to-urjaa-orange">Reliably & Responsibly.</span>
               </h1>
 
-              <p className="text-lg text-slate-600 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10">
+              <p className="text-lg text-slate-300 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-10">
                 We provide certified, high-efficiency power generation solutions for businesses that cannot afford downtime. Partner with engineering experts who understand your load requirements.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                <ContactSalesButton size="lg" className="h-12 px-8 text-base bg-urjaa-navy hover:bg-urjaa-navy-light text-white rounded-md shadow-sm">
+                <ContactSalesButton size="lg" variant="outline" className="h-12 px-8 text-base border-white/20 text-white hover:bg-white/10 hover:border-white">
                   Schedule Site Audit
                 </ContactSalesButton>
               </div>
