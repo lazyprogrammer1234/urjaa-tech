@@ -78,7 +78,7 @@ export default function Home() {
       </section>
 
       {/* Brands Section (Kubota) */}
-      <section className="py-24 bg-white border-y border-slate-100">
+      <section id="products" className="py-24 bg-white border-y border-slate-100">
         <div className="container px-4 sm:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-slate-900 mb-4">Trusted Power Partners</h2>
@@ -132,7 +132,7 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us */}
-      <section id="about" className="py-24 bg-slate-50 relative overflow-hidden">
+      <section id="services" className="py-24 bg-slate-50 relative overflow-hidden">
         <div className="container px-4 sm:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
