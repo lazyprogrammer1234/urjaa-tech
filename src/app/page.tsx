@@ -8,6 +8,26 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div className="min-h-screen bg-slate-50 relative overflow-hidden font-sans">
+      {/* Intro Logo Section */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-white">
+        <div className="absolute inset-0 bg-white"></div>
+
+        <div className="relative z-10 w-full h-full flex items-center justify-center">
+          <video
+            src="/logo-intro.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover md:object-contain max-w-[100vw] max-h-[100vh]"
+          />
+        </div>
+
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 text-urjaa-navy/30 animate-bounce z-20">
+          <ArrowRight className="h-8 w-8 rotate-90 text-slate-400" />
+        </div>
+      </section>
+
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
