@@ -35,7 +35,7 @@ export function ChatWidget() {
                     role: 'bot',
                     content: INITIAL_GREETING,
                     type: 'options',
-                    options: ["Looking for a Quote", "Just Browsing", "Need Service"]
+                    options: ["Get a Quotation", "Check Availability", "Service Support"]
                 });
                 setIsTyping(false);
                 setStage('INTENT_DETECTION');
@@ -97,7 +97,7 @@ export function ChatWidget() {
 
                 addMessage({
                     role: 'bot',
-                    content: "I can definitely help with that. To recommend the best option, could you tell me what this generator will be used for? (e.g., Factory, Hospital, Residential, Shop)"
+                    content: "Excellent choice. We specialize in reliable power backup for critical operations. To recommend the best fit, could you tell me **where this generator will be used**? (e.g., Factory, Hospital, Residential Tower)"
                 });
                 setStage('DISCOVERY_APPLICATION');
                 break;
@@ -106,7 +106,7 @@ export function ChatWidget() {
                 setRequirements(prev => ({ ...prev, application: input }));
                 addMessage({
                     role: 'bot',
-                    content: "Got it. And do you have a specific capacity in mind (e.g., 20kVA, 100kVA)? If not, roughly how big is the area?"
+                    content: "Noted. Identifying the right load is crucial. Do you have a specific capacity in mind (e.g., **62.5 kVA**, **125 kVA**)? Or just a rough estimate?"
                 });
                 setStage('DISCOVERY_CAPACITY');
                 break;
@@ -131,7 +131,7 @@ export function ChatWidget() {
                 setTimeout(() => {
                     addMessage({
                         role: 'bot',
-                        content: "Would you like me to arrange a formal quotation or a site visit from our team?"
+                        content: "I can arrange a **formal technical proposal** for you to review. Shall we proceed?"
                     });
                     setStage('UNKNOWN_CAPTURE_PREP'); // Intermediate
                 }, 1000);
@@ -141,7 +141,7 @@ export function ChatWidget() {
 
             case 'LEAD_CAPTURE_NAME':
                 if (input.toLowerCase().includes('ye') || input.toLowerCase().includes('sure') || input.toLowerCase().includes('ok')) {
-                    addMessage({ role: 'bot', content: "Great! May I have your name?" });
+                    addMessage({ role: 'bot', content: "Great. May I start with your **name**?" });
                 } else {
                     // If user says no, try to close gently
                     addMessage({ role: 'bot', content: "No problem. Feel free to browse our products section. Let me know if you change your mind!" });
@@ -161,7 +161,7 @@ export function ChatWidget() {
                         addMessage({ role: 'bot', content: "Understood. Feel free to explore our range!" });
                         setStage('COMPLETED');
                     } else {
-                        addMessage({ role: 'bot', content: "Excellent. May I start with your full name?" });
+                        addMessage({ role: 'bot', content: "Excellent. May I start with your **name**?" });
                         // Stays in LEAD_CAPTURE_NAME to catch the next input
                     }
                 }

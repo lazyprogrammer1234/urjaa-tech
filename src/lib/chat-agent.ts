@@ -31,7 +31,7 @@ export interface Message {
     timestamp: number;
 }
 
-export const INITIAL_GREETING = "Hi! Tell us your power needs and we’ll guide you.";
+export const INITIAL_GREETING = "Welcome to **Urjaa Tech & Power Solutions**. I’m your virtual power consultant. How can I assist you today?";
 
 export const KUBOTA_KEYWORDS = ['silent', 'quiet', 'compact', 'small', 'fuel efficient', 'low noise'];
 export const MAHINDRA_KEYWORDS = ['heavy', 'factory', 'industrial', 'large', 'continuous', 'robust'];
@@ -45,8 +45,8 @@ export function determineRecommendation(req: UserRequirement): string {
     KUBOTA_KEYWORDS.forEach(k => { if (text.includes(k)) scores.kubota++; });
     MAHINDRA_KEYWORDS.forEach(k => { if (text.includes(k)) scores.mahindra++; });
 
-    if (scores.kubota > scores.mahindra) return "Based on your need for quiet and compact power, I highly recommend our **Kubota** series. They are Japanese-engineered for silence and efficiency.";
-    if (scores.mahindra > scores.kubota) return "For your heavy-duty industrial requirements, our **Shyam Global (Mahindra)** generators are the best fit. They offer robust performance and low maintenance.";
+    if (scores.kubota > scores.mahindra) return "Based on your need for quiet and compact power, I highly recommend our **Kubota** series. It offers superior fuel efficiency and Japanese engineering perfect for your requirements.";
+    if (scores.mahindra > scores.kubota) return "For your heavy-duty industrial requirements, the **Shyam Global (Mahindra)** series is the best fit. It is built as a robust workhorse for critical continuous loads.";
 
-    return "We have excellent options from both **Kubota** and **Mahindra**. Kubota is great for silent operation, while Mahindra is a workhorse for heavy loads.";
+    return "We have excellent options from both **Kubota** and **Mahindra**. Kubota excels in silent operation, while Mahindra is renowned for heavy-duty performance.";
 }
