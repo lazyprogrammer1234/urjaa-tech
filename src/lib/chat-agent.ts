@@ -31,11 +31,11 @@ export interface Message {
     timestamp: number;
 }
 
-export const INITIAL_GREETING = "Welcome to **Urjaa Tech & Power Solutions**. I’m your virtual power consultant. How can I assist you today?";
+export const INITIAL_GREETING = "Welcome to Urjaa Tech & Power Solutions. I’m your virtual power consultant. How can I assist you today?";
 
 export const KUBOTA_KEYWORDS = ['silent', 'quiet', 'compact', 'small', 'fuel efficient', 'low noise'];
 
 export function determineRecommendation(req: UserRequirement): string {
     // Universal Recommendation for Kubota
-    return "Based on your requirements, I highly recommend our **Kubota** series. It offers renowned Japanese engineering, superior fuel efficiency, and compact design suitable for both industrial and residential needs.";
+    return "Based on your requirements, I highly recommend our Kubota series. It offers renowned Japanese engineering, superior fuel efficiency, and compact design suitable for both industrial and residential needs.";
 }

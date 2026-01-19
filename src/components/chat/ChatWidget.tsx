@@ -97,7 +97,7 @@ export function ChatWidget() {
 
                 addMessage({
                     role: 'bot',
-                    content: "Excellent choice. We specialize in reliable power backup for critical operations. To recommend the best fit, could you tell me **where this generator will be used**? (e.g., Factory, Hospital, Residential Tower)"
+                    content: "Excellent choice. We specialize in reliable power backup for critical operations. To recommend the best fit, could you tell me where this generator will be used? (e.g., Factory, Hospital, Residential Tower)"
                 });
                 setStage('DISCOVERY_APPLICATION');
                 break;
@@ -106,7 +106,7 @@ export function ChatWidget() {
                 setRequirements(prev => ({ ...prev, application: input }));
                 addMessage({
                     role: 'bot',
-                    content: "Noted. Identifying the right load is crucial. Do you have a specific capacity in mind (e.g., **62.5 kVA**, **125 kVA**)? Or just a rough estimate?"
+                    content: "Noted. Identifying the right load is crucial. Do you have a specific capacity in mind (e.g., 62.5 kVA, 125 kVA)? Or just a rough estimate?"
                 });
                 setStage('DISCOVERY_CAPACITY');
                 break;
@@ -131,7 +131,7 @@ export function ChatWidget() {
                 setTimeout(() => {
                     addMessage({
                         role: 'bot',
-                        content: "I can arrange a **formal technical proposal** for you to review. Shall we proceed?"
+                        content: "I can arrange a formal technical proposal for you to review. Shall we proceed?"
                     });
                     setStage('UNKNOWN_CAPTURE_PREP'); // Intermediate
                 }, 1000);
@@ -153,7 +153,7 @@ export function ChatWidget() {
 
             case 'LEAD_CAPTURE_NAME':
                 setRequirements(prev => ({ ...prev, contactName: input }));
-                addMessage({ role: 'bot', content: "Thanks. Could you please share your **phone number** so our team can reach out?" });
+                addMessage({ role: 'bot', content: "Thanks. Could you please share your phone number so our team can reach out?" });
                 setStage('LEAD_CAPTURE_PHONE');
                 break;
 
