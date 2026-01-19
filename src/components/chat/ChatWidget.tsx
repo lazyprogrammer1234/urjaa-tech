@@ -136,36 +136,28 @@ export function ChatWidget() {
                     setStage('UNKNOWN_CAPTURE_PREP'); // Intermediate
                 }, 1000);
 
-                setStage('LEAD_CAPTURE_NAME');
+                setStage('UNKNOWN_CAPTURE_PREP'); // Wait for user confirmation
                 break;
 
-            case 'LEAD_CAPTURE_NAME':
-                if (input.toLowerCase().includes('ye') || input.toLowerCase().includes('sure') || input.toLowerCase().includes('ok')) {
-                    addMessage({ role: 'bot', content: "Great. May I start with your **name**?" });
-                } else {
-                    // If user says no, try to close gently
-                    addMessage({ role: 'bot', content: "No problem. Feel free to browse our products section. Let me know if you change your mind!" });
+            case 'UNKNOWN_CAPTURE_PREP':
+                // User responds to "Shall we proceed?"
+                if (lowerInput.includes('no') || lowerInput.includes('cancel')) {
+                    addMessage({ role: 'bot', content: "Understood. Feel free to browse our products section in the meantime!" });
                     setStage('COMPLETED');
-                    return;
+                } else {
+                    // Assume Yes/Proceed
+                    addMessage({ role: 'bot', content: "Great. May I start with your **name**?" });
+                    setStage('LEAD_CAPTURE_NAME');
                 }
                 break;
 
             case 'LEAD_CAPTURE_NAME':
-                if (messages[messages.length - 1].content.includes("May I have your name?")) {
-                    setRequirements(prev => ({ ...prev, contactName: input }));
-                    addMessage({ role: 'bot', content: "Thanks. Could you please share your phone number so our team can reach out?" });
-                    setStage('LEAD_CAPTURE_PHONE');
-                } else {
-                    // Processing the Yes/No to "Would you like a quote?"
-                    if (lowerInput.includes('no')) {
-                        addMessage({ role: 'bot', content: "Understood. Feel free to explore our range!" });
-                        setStage('COMPLETED');
-                    } else {
-                        addMessage({ role: 'bot', content: "Excellent. May I start with your **name**?" });
-                        // Stays in LEAD_CAPTURE_NAME to catch the next input
-                    }
-                }
+                setRequirements(prev => ({ ...prev, contactName: input }));
+                addMessage({ role: 'bot', content: "Thanks. Could you please share your **phone number** so our team can reach out?" });
+                setStage('LEAD_CAPTURE_PHONE');
                 break;
+
+
 
             case 'LEAD_CAPTURE_PHONE':
                 setRequirements(prev => ({ ...prev, contactPhone: input }));
