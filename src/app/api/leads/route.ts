@@ -80,8 +80,9 @@ export async function POST(request: Request) {
 
         // Send Email via Resend
         if (process.env.RESEND_API_KEY) {
+            console.log("Attempting to send email using Key:", process.env.RESEND_API_KEY.slice(0, 5) + "...");
             try {
-                await resend.emails.send({
+                const emailResponse = await resend.emails.send({
                     from: 'Urjaa Leads <onboarding@resend.dev>', // Default testing domain
                     to: 'deoremanas69@gmail.com',
                     subject: `${category === 'HOT' ? '🔥 HOT LEAD' : '🔔 New Lead'}: ${leadRecord.name} (${leadRecord.capacity})`,
@@ -130,10 +131,18 @@ export async function POST(request: Request) {
                         </div>
                     `
                 });
-                console.log("✅ Email sent successfully");
+
+                if (emailResponse.error) {
+                    console.error("❌ Resend Error:", emailResponse.error);
+                } else {
+                    console.log("✅ Email sent successfully. ID:", emailResponse.data?.id);
+                }
+
             } catch (emailError) {
-                console.error("❌ Email failed:", emailError);
+                console.error("❌ Email Exception:", emailError);
             }
+        } else {
+            console.warn("⚠️ RESEND_API_KEY is missing from environment variables");
         }
 
         // Check for google credentials (Optional fallback)
