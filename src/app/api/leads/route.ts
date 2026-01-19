@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server';
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import { JWT } from 'google-auth-library';
+import { Resend } from 'resend';
 
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Scoring Logic
 function calculateScore(text: string): { score: number; category: 'HOT' | 'WARM' | 'COLD' } {
@@ -70,15 +72,73 @@ export async function POST(request: Request) {
             wa_draft: waDraft
         };
 
-        // Log to console (Persistent in Vercel Logs)
+        // Log to console
         console.log("----------------------------------------");
         if (category === 'HOT') console.log("🔥 HOT LEAD ALERT 🔥");
         console.log("🔔 NEW LEAD CAPTURED:", JSON.stringify(leadRecord, null, 2));
         console.log("----------------------------------------");
 
-        // Check for google credentials
+        // Send Email via Resend
+        if (process.env.RESEND_API_KEY) {
+            try {
+                await resend.emails.send({
+                    from: 'Urjaa Leads <onboarding@resend.dev>', // Default testing domain
+                    to: 'deoremanas69@gmail.com',
+                    subject: `${category === 'HOT' ? '🔥 HOT LEAD' : '🔔 New Lead'}: ${leadRecord.name} (${leadRecord.capacity})`,
+                    html: `
+                        <div style="font-family: sans-serif; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px;">
+                            <h2 style="color: #0f172a;">New Web Lead Captured</h2>
+                            
+                            <div style="margin-bottom: 20px; padding: 15px; background: ${category === 'HOT' ? '#fef2f2' : '#f8fafc'}; border-radius: 6px;">
+                                <strong style="color: ${category === 'HOT' ? '#dc2626' : '#475569'};">AI Score: ${score}/100 (${category})</strong>
+                            </div>
+
+                            <table style="width: 100%; text-align: left; border-collapse: collapse;">
+                                <tr>
+                                    <td style="padding: 8px; color: #64748b;">Name:</td>
+                                    <td style="padding: 8px; font-weight: bold;">${leadRecord.name}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; color: #64748b;">Phone:</td>
+                                    <td style="padding: 8px;">
+                                        <a href="tel:${leadRecord.phone}" style="color: #0284c7; text-decoration: none;">${leadRecord.phone}</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; color: #64748b;">Requirement:</td>
+                                    <td style="padding: 8px;">${leadRecord.capacity}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; color: #64748b;">Company:</td>
+                                    <td style="padding: 8px;">${leadRecord.company}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; color: #64748b;">Location:</td>
+                                    <td style="padding: 8px;">${leadRecord.location}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px; color: #64748b;">Details:</td>
+                                    <td style="padding: 8px;">${leadRecord.details}</td>
+                                </tr>
+                            </table>
+
+                            <div style="margin-top: 25px;">
+                                <a href="${waDraft}" style="background-color: #25D366; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">
+                                    Reply via WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    `
+                });
+                console.log("✅ Email sent successfully");
+            } catch (emailError) {
+                console.error("❌ Email failed:", emailError);
+            }
+        }
+
+        // Check for google credentials (Optional fallback)
         if (!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || !process.env.GOOGLE_PRIVATE_KEY || !process.env.GOOGLE_SHEET_ID) {
-            return NextResponse.json({ success: true, message: "Lead logged (Sheet skipped)", intelligence: { score, category } });
+            return NextResponse.json({ success: true, message: "Lead processed (Email sent)", intelligence: { score, category } });
         }
 
         // Initialize Auth
