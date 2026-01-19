@@ -66,6 +66,13 @@ export function ChatWidget() {
         }, 1200);
     };
 
+    // Smart Extraction Helper
+    const extractCapacity = (text: string): string | null => {
+        const match = text.match(/(\d+(\.\d+)?)\s*(kva|kw)/i) || text.match(/(\d+)\s*k/i);
+        if (match) return match[0];
+        return null;
+    };
+
     const processAgentLogic = (input: string) => {
         // This is the core "Agent" logic from the Prompt
         const lowerInput = input.toLowerCase();
@@ -95,6 +102,10 @@ export function ChatWidget() {
                     setRequirements(prev => ({ ...prev, intent: 'BROWSING' }));
                 }
 
+                // Eagerly check for capacity in first message too
+                const earlyCap = extractCapacity(input);
+                if (earlyCap) setRequirements(prev => ({ ...prev, capacity: earlyCap }));
+
                 addMessage({
                     role: 'bot',
                     content: "Excellent choice. We specialize in reliable power backup for critical operations. To recommend the best fit, could you tell me where this generator will be used? (e.g., Factory, Hospital, Residential Tower)"
@@ -104,11 +115,24 @@ export function ChatWidget() {
 
             case 'DISCOVERY_APPLICATION':
                 setRequirements(prev => ({ ...prev, application: input }));
-                addMessage({
-                    role: 'bot',
-                    content: "Noted. Identifying the right load is crucial. Do you have a specific capacity in mind (e.g., 62.5 kVA, 125 kVA)? Or just a rough estimate?"
-                });
-                setStage('DISCOVERY_CAPACITY');
+
+                // Check if capacity was already mentioned in this turn or previous
+                const detectedCap = extractCapacity(input);
+                if (detectedCap || requirements.capacity) {
+                    if (detectedCap) setRequirements(prev => ({ ...prev, capacity: detectedCap }));
+
+                    addMessage({
+                        role: 'bot',
+                        content: "Noted. Which city or area will this be installed in?"
+                    });
+                    setStage('DISCOVERY_LOCATION');
+                } else {
+                    addMessage({
+                        role: 'bot',
+                        content: "Noted. Identifying the right load is crucial. Do you have a specific capacity in mind (e.g., 62.5 kVA, 125 kVA)? Or just a rough estimate?"
+                    });
+                    setStage('DISCOVERY_CAPACITY');
+                }
                 break;
 
             case 'DISCOVERY_CAPACITY':
