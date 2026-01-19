@@ -121,6 +121,10 @@ export async function POST(request: Request) {
                                     <td style="padding: 8px; color: #64748b;">Details:</td>
                                     <td style="padding: 8px;">${leadRecord.details}</td>
                                 </tr>
+                                <tr>
+                                    <td style="padding: 8px; color: #64748b;">Source:</td>
+                                    <td style="padding: 8px; color: #8b5cf6; font-weight: bold;">${leadRecord.source}</td>
+                                </tr>
                             </table>
 
                             <div style="margin-top: 25px;">

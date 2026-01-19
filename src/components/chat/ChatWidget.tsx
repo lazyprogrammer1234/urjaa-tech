@@ -165,7 +165,11 @@ export function ChatWidget() {
                 setStage('COMPLETED');
 
                 // Submit Data
-                const finalData = { ...requirements, contactPhone: input };
+                const finalData = {
+                    ...requirements,
+                    contactPhone: input,
+                    source: 'AI Chat Agent'
+                };
                 console.log("LEAD CAPTURED:", finalData);
 
                 // Send to API
