@@ -150,45 +150,38 @@ export function ChatWidget() {
                 }
                 break;
 
-            case 'LEAD_CAPTURE_CONTACT': // Wait, logic above was finding name. Logic flow fix:
-                // Actually the previous step set the stage to LEAD_CAPTURE_NAME, so the NEXT input (this one) is the Name.
-                // Wait, my logic block 'LEAD_CAPTURE_NAME' is processing the input 'Yes/No' to the previous question?
-                // No, I need to handle the Yes/No first.
-
-                // Let's refactor slightly for clarity:
-                // If 'LEAD_CAPTURE_NAME' is active, the Input is the NAME.
-                // But I never asked for the name in the previous block properly if I just set it to LEAD_CAPTURE_NAME immediately after asking "Would you like...".
-                // Ah, the user needs to reply "Yes" first.
-
-                // Correct flow:
-                // Bot: Would you like a quote?
-                // User: Yes
-                // Bot: What is your name?
-                // User: [Name] -> processed by LEAD_CAPTURE_NAME
-
-                // So I'll just be permissive here.
+            case 'LEAD_CAPTURE_NAME':
                 if (messages[messages.length - 1].content.includes("May I have your name?")) {
                     setRequirements(prev => ({ ...prev, contactName: input }));
-                    addMessage({ role: 'bot', content: "Thanks. And the best phone number to reach you?" });
-                    setStage('LEAD_CAPTURE_CONTACT');
+                    addMessage({ role: 'bot', content: "Thanks. Could you please share your phone number so our team can reach out?" });
+                    setStage('LEAD_CAPTURE_PHONE');
                 } else {
-                    // Processing the Yes/No
+                    // Processing the Yes/No to "Would you like a quote?"
                     if (lowerInput.includes('no')) {
-                        addMessage({ role: 'bot', content: "Understood. Feel free to explore!" });
+                        addMessage({ role: 'bot', content: "Understood. Feel free to explore our range!" });
                         setStage('COMPLETED');
                     } else {
                         addMessage({ role: 'bot', content: "Excellent. May I start with your full name?" });
-                        // Maintain stage
+                        // Stays in LEAD_CAPTURE_NAME to catch the next input
                     }
                 }
                 break;
 
-            case 'LEAD_CAPTURE_CONTACT':
-                setRequirements(prev => ({ ...prev, contactDetails: input }));
-                addMessage({ role: 'bot', content: "Perfect. I've noted your requirements. Our sales team will contact you shortly with the details. Thank you for choosing Urjaa Tech!" });
+            case 'LEAD_CAPTURE_PHONE':
+                setRequirements(prev => ({ ...prev, contactPhone: input }));
+                addMessage({ role: 'bot', content: "Perfect. I've noted your requirements. Our sales team will contact you shortly. Thank you for choosing Urjaa Tech!" });
                 setStage('COMPLETED');
-                // Ideally send this data to a backend here
-                console.log("LEAD CAPTURED:", { ...requirements, contactDetails: input });
+
+                // Submit Data
+                const finalData = { ...requirements, contactPhone: input };
+                console.log("LEAD CAPTURED:", finalData);
+
+                // Send to API
+                fetch('/api/leads', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(finalData)
+                }).catch(err => console.error("Failed to submit lead:", err));
                 break;
 
             case 'COMPLETED':

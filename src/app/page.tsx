@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { FindGeneratorButton } from "@/components/home/FindGeneratorButton";
 import { ContactSalesButton } from "@/components/home/ContactSalesButton";
+import { LeadCaptureForm } from "@/components/home/LeadCaptureForm";
 import { ArrowRight, CheckCircle2, Factory, ShieldCheck, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -41,31 +42,40 @@ export default function Home() {
           <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
         </div>
 
-        <div className="container relative z-10 px-4 sm:px-8 text-center pt-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-urjaa-primary/10 backdrop-blur border border-urjaa-primary/20 text-sm font-medium text-urjaa-primary-light mb-8">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-urjaa-primary opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-urjaa-primary"></span>
-            </span>
-            Authorized Generator Dealership
-          </div>
+        <div className="container relative z-10 px-4 sm:px-8 pt-12">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Column: Text */}
+            <div className="text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-urjaa-primary/10 backdrop-blur border border-urjaa-primary/20 text-sm font-medium text-urjaa-primary-light mb-8 mx-auto lg:mx-0">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-urjaa-primary opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-urjaa-primary"></span>
+                </span>
+                Authorized Generator Dealership
+              </div>
 
-          <h1 className="text-6xl md:text-8xl font-display font-bold leading-tight tracking-tight mb-8 drop-shadow-2xl">
-            Powering tomorrow, <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-urjaa-primary-light to-urjaa-accent">
-              Responsibly
-            </span>
-          </h1>
+              <h1 className="text-5xl md:text-7xl font-display font-bold leading-tight tracking-tight mb-8 drop-shadow-2xl">
+                Powering tomorrow, <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-urjaa-primary-light to-urjaa-accent">
+                  Responsibly
+                </span>
+              </h1>
 
-          <p className="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto leading-relaxed mb-12 font-light">
-            We deliver robust, industrial-grade power solutions. Specialized in Kubota and high-efficiency generators for your business continuity.
-          </p>
+              <p className="text-xl text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed mb-10 font-light">
+                We deliver robust, industrial-grade power solutions. Specialized in Kubota and high-efficiency generators for your business continuity.
+              </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <FindGeneratorButton />
-            <ContactSalesButton size="lg" variant="outline" className="h-14 px-8 text-lg border-white/20 text-white hover:bg-white/10 hover:border-white">
-              Contact Sales
-            </ContactSalesButton>
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                <ContactSalesButton size="lg" variant="outline" className="h-12 px-8 text-base border-white/20 text-white hover:bg-white/10 hover:border-white">
+                  Contact Sales Now
+                </ContactSalesButton>
+              </div>
+            </div>
+
+            {/* Right Column: Form */}
+            <div className="flex justify-center lg:justify-end">
+              <LeadCaptureForm />
+            </div>
           </div>
         </div>
       </section>

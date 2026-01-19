@@ -6,7 +6,7 @@ export type ChatStage =
     | 'DISCOVERY_LOCATION'
     | 'RECOMMENDATION'
     | 'LEAD_CAPTURE_NAME'
-    | 'LEAD_CAPTURE_CONTACT'
+    | 'LEAD_CAPTURE_PHONE'
     | 'UNKNOWN_CAPTURE_PREP'
     | 'CHECK_AVAILABILITY_INPUT' // New stage for 5-250kVA check
     | 'COMPLETED';
@@ -18,6 +18,7 @@ export interface UserRequirement {
     location?: string;
     recommendedBrand?: 'KUBOTA' | 'MAHINDRA' | 'BOTH';
     contactName?: string;
+    contactPhone?: string;
     contactDetails?: string;
 }
 
@@ -30,7 +31,7 @@ export interface Message {
     timestamp: number;
 }
 
-export const INITIAL_GREETING = "Hello! Welcome to Urjaa Tech. I'm your virtual assistant. Are you looking for a specific generator or just browsing our options today?";
+export const INITIAL_GREETING = "Hi! Tell us your power needs and we’ll guide you.";
 
 export const KUBOTA_KEYWORDS = ['silent', 'quiet', 'compact', 'small', 'fuel efficient', 'low noise'];
 export const MAHINDRA_KEYWORDS = ['heavy', 'factory', 'industrial', 'large', 'continuous', 'robust'];
