@@ -212,9 +212,9 @@ export default function Home() {
         <div className="container px-4">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Power Your Business?</h2>
           <p className="text-blue-200 mb-8 max-w-xl mx-auto">Let our experts guide you to the perfect generator selection today.</p>
-          <Button size="lg" className="bg-white text-urjaa-navy-dark hover:bg-blue-50 font-bold px-8">
-            Get a Free Consultation
-          </Button>
+          <ContactSalesButton size="lg" className="bg-white text-urjaa-navy-dark hover:bg-blue-50 font-bold px-8">
+            Get a Free Consultation: +91-75592 79059
+          </ContactSalesButton>
         </div>
       </section>
     </div>
