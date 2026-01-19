@@ -3,7 +3,7 @@ import { GoogleSpreadsheet } from 'google-spreadsheet';
 import { JWT } from 'google-auth-library';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 // Scoring Logic
 function calculateScore(text: string): { score: number; category: 'HOT' | 'WARM' | 'COLD' } {
@@ -79,8 +79,8 @@ export async function POST(request: Request) {
         console.log("----------------------------------------");
 
         // Send Email via Resend
-        if (process.env.RESEND_API_KEY) {
-            console.log("Attempting to send email using Key:", process.env.RESEND_API_KEY.slice(0, 5) + "...");
+        if (resend) {
+            console.log("Attempting to send email...");
             try {
                 const emailResponse = await resend.emails.send({
                     from: 'Urjaa Leads <onboarding@resend.dev>', // Default testing domain
@@ -142,7 +142,7 @@ export async function POST(request: Request) {
                 console.error("❌ Email Exception:", emailError);
             }
         } else {
-            console.warn("⚠️ RESEND_API_KEY is missing from environment variables");
+            console.warn("⚠️ RESEND_API_KEY is missing from environment variables. Email skipped.");
         }
 
         // Check for google credentials (Optional fallback)
